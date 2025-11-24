@@ -1,0 +1,62 @@
+[project]
+name = "slang-explainer"
+version = "0.1.0"
+description = "Fine-tuned LLM for explaining Gen Z slang with definitions and examples"
+requires-python = ">=3.10"
+authors = [
+    {name = "Ruiyang", email = "wangruiyang1210@gmail.com"}
+]
+readme = "../README.md"
+license = {text = "MIT"}
+keywords = ["nlp", "llm", "slang", "gen-z", "fine-tuning", "lora", "fastapi"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.0.0",
+    "transformers>=4.35.0",
+    "torch>=2.0.0",
+    "peft>=0.7.0",
+    "accelerate>=0.24.0",
+    "datasets>=2.14.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.25.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.7.0",
+]
+
+[tool.uvicorn]
+app = "src.router:app"
+host = "0.0.0.0"
+port = 8000
+reload = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=src --cov-report=term-missing --cov-report=html"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
