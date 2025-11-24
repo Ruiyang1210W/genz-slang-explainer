@@ -1,5 +1,4 @@
 """Tests for postprocess module."""
-import pytest
 from src.postprocess import parse_definition_example
 
 
