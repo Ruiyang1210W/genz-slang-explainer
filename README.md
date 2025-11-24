@@ -317,4 +317,4 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 MIT License - see LICENSE file for details
 
 
-AI Assistance Diclosure: This project used Claude.ai to help with debug and polish README.md
+AI-assisted disclosure: This project used Claude.ai to help debug and improve the README.md file.
