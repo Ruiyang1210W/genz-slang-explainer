@@ -100,6 +100,12 @@ uvicorn src.router:app --host 0.0.0.0 --port 8000 --reload
 Then visit `http://localhost:8000/docs` for the interactive API documentation.
 
 **Try these tested terms:** u, stan, jk, sis, lmao, ngl, irl, idc, asap, ez, idk, nsfw, ootd, plz, ppl, sry, ty
+<img width="1059" height="456" alt="GZ1" src="https://github.com/user-attachments/assets/ea28927e-9e0b-4306-84cc-bf628613abcf" />
+Enter term: 'lmaooo' then execute.
+<img width="1059" height="456" alt="GZ2" src="https://github.com/user-attachments/assets/ec3ffe65-59c5-4216-b0a4-be2753f6b757" />
+Response body:
+<img width="1059" height="456" alt="GZ3" src="https://github.com/user-attachments/assets/e659d081-7d7d-4102-a448-4c774794ae51" />
+
 
 ### 2. Compare Base vs Fine-Tuned Model
 
