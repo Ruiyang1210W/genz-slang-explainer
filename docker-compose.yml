@@ -1,4 +1,10 @@
-version: '3.8'
+# version: "3.8"
+#
+# Gen Z Slang Explainer - Docker Compose Configuration
+#
+# First run: Downloads TinyLlama model (~2.2GB) - takes 5-15 minutes
+# Subsequent runs: Uses cached model - starts in ~30 seconds
+# Models are cached in ~/.cache/huggingface on your host machine
 
 services:
   slang-explainer:
@@ -8,8 +14,13 @@ services:
     container_name: genz-slang-api
     ports:
       - "8000:8000"
+    volumes:
+      # Cache HuggingFace models on host to speed up subsequent runs
+      - ~/.cache/huggingface:/root/.cache/huggingface
     environment:
       - LOG_LEVEL=INFO
+      # Show model download progress
+      - HF_HUB_ENABLE_HF_TRANSFER=1
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]

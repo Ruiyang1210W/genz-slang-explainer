@@ -9,7 +9,7 @@ A fine-tuned LLM that explains Gen Z internet slang with definitions and example
 
 ## Overview
 
-This project fine-tunes **TinyLlama-1.1B** using **LoRA (Low-Rank Adaptation)** on a dataset of 1,779 Gen Z slang terms. The model learns to generate accurate definitions and usage examples for internet slang, memes, and modern vernacular.
+This project fine-tunes **TinyLlama-1.1B** using **LoRA (Low-Rank Adaptation)** on a dataset of 1,779 Gen Z slang terms. The model learns to generate accurate definitions and usage examples for internet slang. This project is seperated from my personal project: https://github.com/memeorigin/memeorigin 
 
 ## Features
 
@@ -54,7 +54,7 @@ genz-slang-explainer/
 
 ## Quick Start
 
-### Option 1: Docker (Recommended)
+### Option 1: Docker
 
 ```bash
 # Clone the repository
@@ -64,6 +64,8 @@ cd genz-slang-explainer
 # Run with Docker Compose
 docker-compose up
 ```
+
+**Note:** First startup downloads TinyLlama model (~2.2GB) and takes 5-15 minutes. The model is cached to `~/.cache/huggingface` on your host, so subsequent runs start in ~30 seconds.
 
 The API will be available at `http://localhost:8000`
 
@@ -105,7 +107,9 @@ Then visit `http://localhost:8000/docs` for the interactive API documentation.
 python demo/compare_base_vs_finetuned.py
 ```
 
-This interactive script lets you test any slang term and see how the base model compares to the fine-tuned version (With Lora).
+This interactive script lets you test any slang term and see how the base model compares to the fine-tuned version (With Lora)./
+
+demo video: https://youtu.be/lkPemg-hO2U
 
 ### 3. Run Demo Script
 Test : Model vs Dataset
@@ -266,12 +270,17 @@ The fine-tuned model demonstrates:
 # Build and run with Docker Compose
 docker-compose up -d
 
-# View logs
+# View logs (useful for monitoring first-time model download)
 docker-compose logs -f
 
 # Stop the service
 docker-compose down
 ```
+
+**Performance Notes:**
+- First run: Downloads TinyLlama-1.1B (~2.2GB) - takes 5-15 minutes
+- Subsequent runs: Uses cached model from `~/.cache/huggingface` - starts in ~30 seconds
+- The cache persists on your host machine, speeding up container restarts
 
 **Manual Deployment:**
 ```bash
@@ -308,4 +317,4 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 MIT License - see LICENSE file for details
 
 
-AI Assistance Diclosure: This project used Claude.ai to help with debug and write README.md
+AI Assistance Diclosure: This project used Claude.ai to help with debug and polish README.md
