@@ -9,7 +9,8 @@ A fine-tuned LLM that explains Gen Z internet slang with definitions and example
 
 ## Overview
 
-This project fine-tunes **TinyLlama-1.1B** using **LoRA (Low-Rank Adaptation)** on a dataset of 1,779 Gen Z slang terms. The model learns to generate accurate definitions and usage examples for internet slang. This project is seperated from my personal project: https://github.com/memeorigin/memeorigin 
+This project fine-tunes **TinyLlama-1.1B** using **LoRA (Low-Rank Adaptation)** on a dataset of 1,779 Gen Z slang terms. The model learns to generate accurate definitions and usage examples for internet slang.\
+This project was spun off from my personal project MemeOrigin (Not completed yet; Focusing on memes)
 
 ## Features
 
@@ -113,7 +114,7 @@ Response body:
 python demo/compare_base_vs_finetuned.py
 ```
 
-This interactive script lets you test any slang term and see how the base model compares to the fine-tuned version (With Lora)./
+This interactive script lets you test any slang term and see how the base model compares to the fine-tuned version (With Lora).
 
 demo video: https://youtu.be/lkPemg-hO2U
 
