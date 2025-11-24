@@ -5,8 +5,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 DATA = os.getenv(
-    "SLANG_DATA",
-    os.path.join(os.path.dirname(__file__), "..", "data", "slang_pairs.jsonl")
+    "SLANG_DATA", os.path.join(os.path.dirname(__file__), "..", "data", "slang_pairs.jsonl")
 )
 
 
@@ -32,7 +31,7 @@ def _load_lexicon():
                     term = r["term"].strip().lower()
                     lex[term] = {
                         "definition": r["definition"].strip(),
-                        "example": r["example"].strip()
+                        "example": r["example"].strip(),
                     }
                 except (json.JSONDecodeError, KeyError) as e:
                     logger.warning(f"Skipping invalid line {line_num} in {DATA}: {e}")

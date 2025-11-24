@@ -7,8 +7,7 @@ from .retrieval import lookup
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
 
@@ -17,7 +16,7 @@ app = FastAPI(
     description="Fine-tuned LLM API for explaining Gen Z slang with definitions and examples",
     version="0.1.0",
     docs_url="/docs",
-    redoc_url="/redoc"
+    redoc_url="/redoc",
 )
 
 
@@ -47,11 +46,13 @@ def health():
 
 class ExplainInput(BaseModel):
     """Request model for explain endpoint."""
+
     term: str = Field(..., min_length=1, max_length=100, description="The slang term to explain")
 
 
 class ExplainResponse(BaseModel):
     """Response model for explain endpoint."""
+
     term: str
     definition: str | None
     example: str | None
@@ -104,11 +105,8 @@ def explain(payload: ExplainInput):
             "term": term,
             "definition": parsed["definition"],
             "example": parsed["example"],
-            "source": source
+            "source": source,
         }
     except Exception as e:
         logger.error(f"Error explaining term '{term}': {str(e)}", exc_info=True)
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error processing term: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error processing term: {str(e)}")

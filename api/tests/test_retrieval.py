@@ -1,4 +1,5 @@
 """Tests for retrieval module."""
+
 import os
 import pytest
 import tempfile
@@ -18,9 +19,11 @@ class TestRetrieval:
             {"term": "bussin", "definition": "Really good", "example": "This is bussin"},
         ]
 
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.jsonl', encoding='utf-8') as f:
+        with tempfile.NamedTemporaryFile(
+            mode="w", delete=False, suffix=".jsonl", encoding="utf-8"
+        ) as f:
             for item in test_data:
-                f.write(json.dumps(item) + '\n')
+                f.write(json.dumps(item) + "\n")
             temp_path = f.name
 
         yield temp_path
@@ -37,6 +40,7 @@ class TestRetrieval:
         # Need to reimport to get the new environment variable
         import importlib
         from src import retrieval
+
         importlib.reload(retrieval)
 
         result = retrieval.lookup("rizz")
@@ -51,6 +55,7 @@ class TestRetrieval:
 
         import importlib
         from src import retrieval
+
         importlib.reload(retrieval)
 
         result1 = retrieval.lookup("RIZZ")
@@ -66,6 +71,7 @@ class TestRetrieval:
 
         import importlib
         from src import retrieval
+
         importlib.reload(retrieval)
 
         result = retrieval.lookup("  rizz  ")
@@ -79,6 +85,7 @@ class TestRetrieval:
 
         import importlib
         from src import retrieval
+
         importlib.reload(retrieval)
 
         result = retrieval.lookup("no cap")
@@ -92,6 +99,7 @@ class TestRetrieval:
 
         import importlib
         from src import retrieval
+
         importlib.reload(retrieval)
 
         result = retrieval.lookup("nonexistent")
@@ -103,6 +111,7 @@ class TestRetrieval:
         monkeypatch.setenv("SLANG_DATA", "/nonexistent/path/file.jsonl")
 
         from src import retrieval
+
         lexicon = retrieval._load_lexicon()
 
         # Should return empty dict, not crash
@@ -110,9 +119,11 @@ class TestRetrieval:
 
     def test_load_lexicon_empty_lines(self, monkeypatch):
         """Test that empty lines in JSONL are skipped."""
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.jsonl', encoding='utf-8') as f:
+        with tempfile.NamedTemporaryFile(
+            mode="w", delete=False, suffix=".jsonl", encoding="utf-8"
+        ) as f:
             f.write('{"term": "test", "definition": "Test def", "example": "Test ex"}\n')
-            f.write('\n')  # Empty line
+            f.write("\n")  # Empty line
             f.write('{"term": "test2", "definition": "Test def 2", "example": "Test ex 2"}\n')
             temp_path = f.name
 
@@ -121,6 +132,7 @@ class TestRetrieval:
 
             import importlib
             from src import retrieval
+
             importlib.reload(retrieval)
 
             assert len(retrieval._LEX) == 2

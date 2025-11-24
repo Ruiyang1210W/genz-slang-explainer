@@ -12,11 +12,7 @@ ADAPTER_DIR = os.path.join(
     os.path.dirname(__file__), "..", "..", "models", "adapters", "tinyllama-lora@2025-10-29"
 )
 
-INSTRUCT_TEMPLATE = (
-    "Task: Explain the internet slang.\n"
-    "Term: {term}\n\n"
-    "Definition:"
-)
+INSTRUCT_TEMPLATE = "Task: Explain the internet slang.\n" "Term: {term}\n\n" "Definition:"
 
 # Initialize model and tokenizer at module level
 try:

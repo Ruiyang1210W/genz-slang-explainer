@@ -1,4 +1,5 @@
 """Tests for API router endpoints."""
+
 import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch
@@ -11,6 +12,7 @@ class TestAPIEndpoints:
     def client(self):
         """Create a test client."""
         from src.router import app
+
         return TestClient(app)
 
     def test_index_endpoint(self, client):
@@ -41,7 +43,7 @@ class TestAPIEndpoints:
         mock_parse.return_value = {
             "definition": "Cool slang",
             "example": "That's so cool",
-            "format_ok": True
+            "format_ok": True,
         }
 
         response = client.post("/v1/explain", json={"term": "cool"})
@@ -65,16 +67,12 @@ class TestAPIEndpoints:
         mock_generate.return_value = "Some unparseable text"
 
         # Mock parse to indicate format is not ok
-        mock_parse.return_value = {
-            "definition": None,
-            "example": None,
-            "format_ok": False
-        }
+        mock_parse.return_value = {"definition": None, "example": None, "format_ok": False}
 
         # Mock lookup to return baseline data
         mock_lookup.return_value = {
             "definition": "Baseline definition",
-            "example": "Baseline example"
+            "example": "Baseline example",
         }
 
         response = client.post("/v1/explain", json={"term": "test"})
@@ -95,11 +93,7 @@ class TestAPIEndpoints:
         mock_generate.return_value = "Some unparseable text"
 
         # Mock parse to indicate format is not ok
-        mock_parse.return_value = {
-            "definition": None,
-            "example": None,
-            "format_ok": False
-        }
+        mock_parse.return_value = {"definition": None, "example": None, "format_ok": False}
 
         # Mock lookup to return None (no baseline match)
         mock_lookup.return_value = None
@@ -113,15 +107,13 @@ class TestAPIEndpoints:
 
     def test_explain_endpoint_case_normalization(self, client):
         """Test that the endpoint normalizes term case."""
-        with patch("src.router.generate") as mock_generate, \
-             patch("src.router.parse_definition_example") as mock_parse:
+        with (
+            patch("src.router.generate") as mock_generate,
+            patch("src.router.parse_definition_example") as mock_parse,
+        ):
 
             mock_generate.return_value = "Definition: Test\nExample: Test"
-            mock_parse.return_value = {
-                "definition": "Test",
-                "example": "Test",
-                "format_ok": True
-            }
+            mock_parse.return_value = {"definition": "Test", "example": "Test", "format_ok": True}
 
             response = client.post("/v1/explain", json={"term": "  UPPERCASE  "})
 
